@@ -10,7 +10,6 @@
 - **Tempo Real**: Sincronização automática entre dispositivos usando **Socket.IO**.
 - **Controle de Fila**: Abrir/fechar fila conforme demanda.
 - **Histórico Completo**: Registro de todas as senhas atendidas.
-- **Exportação de Dados**: Exporte promoções e atendimentos em **CSV**.
 - **Autenticação Segura**: Login de funcionários com **JWT**.
 
 ---
