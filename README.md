@@ -1,128 +1,139 @@
-# **FilaFlex - Sistema de Gerenciamento de Filas**
+# FilaFlex - Sistema de Gerenciamento de Filas
 
-🚀 **FilaFlex** é um sistema de gerenciamento de filas em tempo real, desenvolvido com **React (frontend)** e **Node.js + Express (backend)**. Ele permite a gestão eficiente de senhas de atendimento, garantindo uma experiência fluida tanto para os funcionários quanto para os clientes.
-
----
-
-## **📌 Funcionalidades**
-✅ **Geração de Senhas** → Clientes podem retirar uma senha via sistema.  
-✅ **Chamada de Senhas** → Funcionários podem chamar a próxima senha da fila.  
-✅ **Atualização em Tempo Real** → Uso de **Socket.IO** para sincronização automática.  
-✅ **Gerenciamento de Filas** → Possibilidade de **abrir e fechar a fila** conforme necessário.  
-✅ **Histórico de Atendimento** → Registra as senhas chamadas.  
-✅ **Exportação de Dados** → Exporta as promoções e atendimentos em **CSV**.  
-✅ **Autenticação Segura** → Uso de **JWT** para login de funcionários.  
+🚀 **FilaFlex** é um sistema de gerenciamento de filas em tempo real desenvolvido com **React (frontend)** e **Node.js + Express (backend)**. Oferece uma experiência fluida para clientes e funcionários através de recursos modernos e sincronização instantânea.
 
 ---
 
-## **🛠 Tecnologias Utilizadas**
+## 📌 Funcionalidades Principais
+- **Geração de Senhas**: Clientes retiram senhas via interface intuitiva.
+- **Chamada de Senhas**: Funcionários chamam próxima senha com um clique.
+- **Tempo Real**: Sincronização automática entre dispositivos usando **Socket.IO**.
+- **Controle de Fila**: Abrir/fechar fila conforme demanda.
+- **Histórico Completo**: Registro de todas as senhas atendidas.
+- **Exportação de Dados**: Exporte promoções e atendimentos em **CSV**.
+- **Autenticação Segura**: Login de funcionários com **JWT**.
+
+---
+
+## 🛠 Tecnologias Utilizadas
 ### **Frontend (React)**
 - React.js + Hooks
 - React Router
-- Axios
-- Socket.IO-Client
-- JSDoc (para documentação)
-- jsPDF (para geração de senhas em PDF)
+- Axios (consumo de API)
+- Socket.IO-Client (comunicação em tempo real)
+- JSDoc (documentação)
+- jsPDF (geração de PDF)
 
-### **Backend (Node.js + Express)**
+### **Backend (Node.js/Express)**
 - Express.js
-- Socket.IO (tempo real)
-- JWT para autenticação
-- Axios para consumo de APIs
-- `jq` para manipulação de JSON
-- `curl` para integração com APIs externas
+- Socket.IO (WebSockets)
+- JWT (autenticação)
+- SQLite (banco de dados)
+- Sequelize (ORM)
+- Axios (integração com APIs externas)
 
-### **Banco de Dados**
-- SQLite (leve e sem necessidade de configuração adicional)
-
----
-
-## **📂 Estrutura do Projeto**
-- **backend/** → Backend Node.js + Express
-  - **controllers/** → Controladores das rotas
-  - **routes/** → Definição de rotas
-  - **models/** → Modelos de banco de dados (SQLite)
-  - **services/** → Lógica de negócios
-  - `.env` → Variáveis de ambiente
-  - `server.js` → Inicialização do servidor
-  - `package.json` → Dependências do backend
-
-- **frontend/** → Frontend React.js
-  - **components/** → Componentes reutilizáveis
-  - **pages/** → Páginas do sistema
-  - **styles/** → Estilos CSS
-  - **services/** → Comunicação com API
-  - `package.json` → Dependências do frontend
-
-- **scripts/** → Scripts auxiliares (Batch, Shell)  
-- `README.md` → Documentação  
+### **Ferramentas Auxiliares**
+- `jq` (manipulação de JSON)
+- `curl` (testes de API)
+- Scripts Shell/Batch (automação)
 
 ---
 
-## **⚡ Como Rodar o Projeto?**
+## 📂 Estrutura do Projeto
+```
+filaflex/
+├── backend/                  # Backend Node.js
+│   ├── controllers/         # Lógica das rotas
+│   ├── models/              # Modelos do banco de dados
+│   ├── routes/              # Definições de endpoints
+│   ├── services/            # Regras de negócio
+│   ├── .env                 # Variáveis de ambiente
+│   └── server.js            # Ponto de inicialização
+│
+├── frontend/                # Frontend React
+│   ├── components/          # Componentes reutilizáveis
+│   ├── pages/               # Telas do sistema
+│   ├── services/            # Chamadas à API
+│   └── styles/              # Estilização CSS
+│
+└── scripts/                 # Scripts de automação
+```
 
-### **1️⃣ Clonar o Repositório**
+---
 
-git clone https://github.com/abnerhkn/filaflex.git
-cd filaflex
-cd backend
-npm install
+## ⚡ Instalação e Execução
 
-### **2️⃣ Clonar o Backend**
-cd backend
-npm install
+### Pré-requisitos
+- Node.js ≥ v14
+- NPM/Yarn
+- SQLite3
 
-### Crie um arquivo .env com as configurações do banco de dados e JWT
-PORT=5000
-DB_STORAGE=./database.sqlite
-JWT_SECRET=sua_chave_secreta
+### Passo a Passo
+1. **Clonar Repositório**
+   ```bash
+   git clone https://github.com/abnerhkn/filaflex.git
+   cd filaflex
+   ```
 
-### Rode as migrações do SQLite:
-npx sequelize-cli db:migrate
+2. **Configurar Backend**
+   ```bash
+   cd backend
+   npm install
+   cp .env.example .env  # Edite o .env com suas configurações
+   npx sequelize-cli db:migrate
+   npm start
+   ```
 
-### Inicie o backend:
-npm start
+3. **Configurar Frontend**
+   ```bash
+   cd ../frontend
+   npm install
+   npm start
+   ```
 
-### 3️⃣ Configurar o Frontend
-cd frontend
-npm install
+📌 Acesse o sistema em: [http://localhost:3000](http://localhost:3000)
 
-### Inicie o frontend:
-npm start
+---
 
-O sistema estará acessível em http://localhost:3000.
+## 🌐 Endpoints da API (Backend)
 
-🌐 Endpoints da API
-Autenticação
-POST /api/auth/login → Autentica um usuário (JWT)
-POST /api/auth/logout → Encerra a sessão
-Gestão de Filas
-POST /api/fila/gerar-senha → Gera uma nova senha
-POST /api/fila/chamar-proximo → Chama a próxima senha
-GET /api/fila/status → Obtém o status da fila (aberta/fechada)
-POST /api/fila/alternar → Alterna entre abrir/fechar a fila
-Promoções
-POST /api/promocoes → Busca promoções ativas
-POST /api/promocoes/produtos → Busca produtos vinculados a promoções
-📡 Comunicação em Tempo Real (Socket.IO)
-O sistema utiliza WebSockets para manter a sincronização automática entre Frontend e Backend.
+### Autenticação
+| Método | Endpoint          | Descrição               |
+|--------|-------------------|-------------------------|
+| POST   | `/api/auth/login` | Gera token JWT          |
+| POST   | `/api/auth/logout`| Encerra sessão          |
 
-Eventos emitidos:
-
-"atualizarFila" → Sempre que a fila for alterada, todos os clientes são atualizados automaticamente.
-
-
-🚀 Melhorias Futuras
-🔹 Implementação de dashboard de estatísticas
-🔹 Suporte para notificações via WhatsApp
-🔹 Melhorias na interface do usuário
-🔹 Exportação de relatórios avançados em PDF e Excel
+### Gestão de Filas
+| Método | Endpoint                | Descrição                     |
+|--------|-------------------------|-------------------------------|
+| POST   | `/api/fila/gerar-senha` | Gera nova senha               |
+| POST   | `/api/fila/chamar-proximo` | Chama próxima senha        |
+| GET    | `/api/fila/status`      | Verifica status da fila       |
+| POST   | `/api/fila/alternar`    | Abre/fecha fila               |
 
 
-👨‍💻 Desenvolvedor
-Nome: Abner Lima
-GitHub: abnerhkn
-LinkedIn: linkedin.com/in/abnerlima
-📄 Licença
-Este projeto está licenciado sob a MIT License. Você pode usá-lo, modificá-lo e distribuí-lo conforme necessário.
+---
 
+## 📡 Comunicação em Tempo Real (Socket.IO)
+- **Evento**: `atualizarFila`
+- **Descrição**: Notifica todos os clientes quando há mudanças na fila (novas senhas, atendimentos, etc).
+
+---
+
+## 🚀 Melhorias Futuras
+- Dashboard com métricas de atendimento
+- Integração com WhatsApp para notificações
+- Relatórios avançados em PDF/Excel
+- Interface responsiva para dispositivos móveis
+
+---
+
+## 👨💻 Desenvolvedor
+**Abner Lima**  
+[![GitHub](https://img.shields.io/badge/GitHub-abnerhkn-blue)](https://github.com/abnerhkn)  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Abner_Lima-blue)](https://linkedin.com/in/abnerlima)
+
+---
+
+## 📄 Licença
+Distribuído sob licença **MIT**. Consulte o arquivo `LICENSE` para detalhes.
